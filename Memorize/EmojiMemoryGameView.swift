@@ -59,12 +59,9 @@ import SwiftUI
 //some basically means the View can have any type
 //Views must always have a body variable
 
-let colors: [Color] =
-    [.red, .orange, .yellow, .green, .blue, .purple]
-
 struct EmojiMemoryGameView: View {
     
-    var viewModel: EmojiMemoryGame
+    @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
         //created numPairs method in ViewModel; if/else control to satisfy font size requirement of lecture 2 requirement 5

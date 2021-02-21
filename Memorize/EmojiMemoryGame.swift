@@ -10,8 +10,9 @@ import SwiftUI
 //private(set) is like a closed but glass door
 //only EmojiMemoryGame can set the model, but Views can still read
 
-class EmojiMemoryGame {
-    private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+
+class EmojiMemoryGame: ObservableObject {
+    @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
     //static makes a function on the type, rather than the instance
     static func createMemoryGame() -> MemoryGame<String>{
@@ -35,7 +36,8 @@ class EmojiMemoryGame {
             return emojiStart[pairIndex]
         }
     }
-
+    
+    
     //
     //MARK: - Access to the Model
     var cards: Array<MemoryGame<String>.Card>{
@@ -48,6 +50,10 @@ class EmojiMemoryGame {
     }
     
     //MARK: - Intents(s)
+    
+    //we get "var objectWillChange: ObservableObjectPublisher" for free from the "constrains-gains" ObservableObject above
+    //rather than use objectWillChange.send(), we use the @Published keyword in model var above
+
     func choose(card: MemoryGame<String>.Card){
         model.choose(card: card)
     }

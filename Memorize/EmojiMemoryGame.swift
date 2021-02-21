@@ -15,12 +15,27 @@ class EmojiMemoryGame {
     
     //static makes a function on the type, rather than the instance
     static func createMemoryGame() -> MemoryGame<String>{
-        let emojis: Array<String> = ["🎃","👻", "🕷", "👺", "🕸"]
-        //satisfy lecture 2 requirement 4
-        return MemoryGame<String>(numberOfPairsOfCards: Int.random(in: 2..<6)) { pairIndex in
-            return emojis[pairIndex]
+        // parameterize game size (min to max pairs)
+        let maxPairs: Int = 5
+        let minPairs: Int = 2
+        var emojiStart: Array<String> = ["🎃","👻", "🕷", "👺", "🕸", "👹", "😈", "⻤", "🍭", "🍫", "🍬", "🦹🏻‍♂️"]
+        emojiStart.shuffle()
+        var emojiFinal: Array<String> = Array<String>()
+        
+        //lecture 2 extra credit solution (randomly select subset of emojis from superset of 12)
+        //shuffle emojistart (one-liner above) then pop and append element to emojiFinal
+        var emojiIndex: Int = 0
+        while emojiIndex < maxPairs {
+            emojiFinal.append(emojiStart.popLast()!)
+            emojiIndex += 1
+            }
+
+        //satisfy lecture 2 requirement 4 (random number of pairs)
+        return MemoryGame<String>(numberOfPairsOfCards: Int.random(in: minPairs..<maxPairs+1)) { pairIndex in
+            return emojiStart[pairIndex]
         }
     }
+
     //
     //MARK: - Access to the Model
     var cards: Array<MemoryGame<String>.Card>{
@@ -36,7 +51,7 @@ class EmojiMemoryGame {
     func choose(card: MemoryGame<String>.Card){
         model.choose(card: card)
     }
-        
 }
+
 
 

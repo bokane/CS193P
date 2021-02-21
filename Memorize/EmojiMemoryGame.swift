@@ -29,8 +29,8 @@ class EmojiMemoryGame {
             emojiFinal.append(emojiStart.popLast()!)
             emojiIndex += 1
             }
-
-        //satisfy lecture 2 requirement 4 (random number of pairs)
+        //initialize game with number of pairs parameter
+        //re-wrote to satisfy lecture 2 homework 4 (random number of pairs)
         return MemoryGame<String>(numberOfPairsOfCards: Int.random(in: minPairs..<maxPairs+1)) { pairIndex in
             return emojiStart[pairIndex]
         }

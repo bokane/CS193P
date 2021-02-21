@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// this file is our "model" per the MVVM framework
 //models might not be structs, could be SQL database, network thing, etc.
 //CardContent is a "don't care" type - we'll initialize as a string later
 struct MemoryGame<CardContent> {

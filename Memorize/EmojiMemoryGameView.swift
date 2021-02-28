@@ -14,28 +14,13 @@ struct EmojiMemoryGameView: View {
     
     var body: some View {
         //created numPairs method in ViewModel; if/else control to satisfy font size requirement of lecture 2 requirement 5
-        if viewModel.numPairs > 4{
-            HStack {
-                ForEach(viewModel.cards) { card in
+            Grid(viewModel.cards, viewForItem: { card in
                     CardView(card: card).onTapGesture {
                         viewModel.choose(card: card)
                         }
-                    }
-                }
+                    })
             .foregroundColor(Color.orange)
             .padding()
-        }
-        else {
-            HStack {
-                ForEach(viewModel.cards) { card in
-                    CardView(card: card).onTapGesture {
-                        viewModel.choose(card: card)
-                        }
-                    }
-                }
-            .foregroundColor(Color.orange)
-            .padding()
-        }
     }
 }
 

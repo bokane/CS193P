@@ -17,10 +17,10 @@ struct EmojiMemoryGameView: View {
             Grid(viewModel.cards, viewForItem: { card in
                     CardView(card: card).onTapGesture {
                         viewModel.choose(card: card)
-                        }
-                    })
-            .foregroundColor(Color.orange)
-            .padding()
+                    }.padding(5)
+            })
+                .foregroundColor(Color.orange)
+                .padding()
     }
 }
 

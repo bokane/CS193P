@@ -14,11 +14,11 @@ struct EmojiMemoryGameView: View {
     
     var body: some View {
         //created numPairs method in ViewModel; if/else control to satisfy font size requirement of lecture 2 requirement 5
-            Grid(viewModel.cards, viewForItem: { card in
+            Grid(viewModel.cards) { card in
                     CardView(card: card).onTapGesture {
                         viewModel.choose(card: card)
                     }.padding(5)
-            })
+            }
                 .foregroundColor(Color.orange)
                 .padding()
     }
@@ -41,7 +41,9 @@ struct CardView: View {
                Text(card.content)
            
             } else {
-               RoundedRectangle(cornerRadius: cornerRadius).fill()
+                if !card.isMatched {
+                    RoundedRectangle(cornerRadius: cornerRadius).fill()
+                }
             }
         }
         .font(Font.system(size: fontSize(for: size)))

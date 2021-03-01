@@ -1,6 +1,98 @@
 # Lecture Notes
 I've found even if I don't always refer to them after the fact (acknowledging I probably should...) taking notes during lecture videos increases my focus and retention. 
 
+
+## Lecture 4 Notes
+Starting off continuing the Memorize build, namely creating a grid as opposed to just rows or just columns. 
+
+Enums are a type of data structure where the value takes discrete states. 
+
+**EXAMPLE:**
+```swift
+enum FastFoodMenuItem {
+    case hamburger
+    case fries
+    case drink
+    case cookie
+}
+```
+```Enum```s are copied and passed around - like structs, unlike classes. Discrete values in ```enum```s can have its own associated data:
+
+**EXAMPLE:**
+```swift
+enum FastFoodMenuItem {
+    case hamburger(numberofPatties: Int)
+    case fries(size: FryOrderSize)
+    case drink(String, ounces: Int) // unnamed string could be the brand, e.g. Coke
+    case cookie
+}
+```
+
+**EXAMPLE:**
+Setting the value of an ```enum```:
+```swift
+  let menuItem = FastFoodMenuItem.hamburger(patties: 2)
+  var otherItem: FastFoodMeniItem = .cookie 
+```
+
+Checking the state of an ```enum```:
+```swift
+var menuItem = FastFoodMenuItem.hamburger(patties: 2)
+switch meniItem {
+  case FastFoodMenuItem.hamburger: print("burger") // can break out of the switch statement
+  case FastFoodMenuItem.fries: print("fries")
+  case FastFoodMenuItem..drink: print("drink")
+  case FastFoodMenuItem.cookie: print("cookie")
+}
+```
+Note: in the above example, we have to case every possible item. You can use ```default``` for cases if too many, or we only care about a few:
+```swift
+var menuItem = FastFoodMenuItem.cookie
+switch meniItem {
+  case .hamburger: break
+  case .fries: print("fries")
+  default: print("other")
+}
+```
+
+You can also declare functions to retrieve info about an ```enum```.
+**EXAMPLE:**
+```swift
+enum FastFoodMenuItem {
+
+  func isIncludedInSpecialOrder(number: Int) -> Bool {
+    switch self {
+      case .hamburger(let pattyCount): return pattyCount == number
+      case .fries, .cookie: return true
+      case .drink(_, let ounces): return ounces == 16
+    }
+
+  }
+
+}
+```
+
+The most important ```enum```: ```Optional```.
+
+**Example:**
+```swift
+enum Optional<T> { //generic type, like Array<Element> or MemoryGame<CardContent>
+  case none
+  case some(T)
+
+}
+``` 
+Note the ```Optional``` can onlyhave two values: ```is set``` (some) or ```not set``` (none). In the ```is set``` case, associated data can tag along (of dont care type ```T```). We use  ```Optional``` any time a variable is unspecified or undetermined e.g. the bogus ```return 0``` from our ```firstIndex(matchin:)``` function. Below are some examples of how ```Optional```s are called.
+**EXAMPLE:**
+```swift
+  var hello: String?              var hello: Optional<String> = .none
+  var hello: String? = "hello"    var hello: Optional<String> = .some("hello")
+  var hello: String? = nil        var hello: Optional<String> = .none
+```
+
+```Optionals``` always start with an implicit ```nil```.
+
+
 ## LECTURE 3 NOTES
 protocols are stripped down versions of structs/classes
 protocols can have funcs/vars but no implementation or storage

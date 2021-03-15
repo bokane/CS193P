@@ -14,6 +14,15 @@ struct EmojiMemoryGameView: View {
     
     var body: some View {
         //created numPairs method in ViewModel; if/else control to satisfy font size requirement of lecture 2 requirement 5
+        VStack{
+            HStack{
+                //lecture 4 requirement 6
+                Text("New Game").onTapGesture {
+                    viewModel.newGame()
+                }
+                Text("Theme Name")
+            }
+            
             Grid(viewModel.cards) { card in
                     CardView(card: card).onTapGesture {
                         viewModel.choose(card: card)
@@ -21,6 +30,8 @@ struct EmojiMemoryGameView: View {
             }
                 .foregroundColor(Color.orange)
                 .padding()
+
+        }
     }
 }
 

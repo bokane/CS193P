@@ -36,7 +36,7 @@ class EmojiMemoryGame: ObservableObject {
             return emojiStart[pairIndex]
         }
     }
-    
+        
     
     //
     //MARK: - Access to the Model
@@ -56,6 +56,11 @@ class EmojiMemoryGame: ObservableObject {
 
     func choose(card: MemoryGame<String>.Card){
         model.choose(card: card)
+    }
+    
+    //lecture 4 requirement 6
+    func newGame(){
+        model = EmojiMemoryGame.createMemoryGame()
     }
 }
 

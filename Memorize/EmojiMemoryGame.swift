@@ -14,6 +14,13 @@ import SwiftUI
 class EmojiMemoryGame: ObservableObject {
     @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
+    var gameTheme: Theme<String> = halloween
+    
+    
+//    func setTheme(newTheme: Theme<String>){
+//        gameTheme = newTheme
+//    }
+    
     //static makes a function on the type, rather than the instance
     static func createMemoryGame() -> MemoryGame<String>{
         // parameterize game size (min to max pairs)
@@ -48,7 +55,7 @@ class EmojiMemoryGame: ObservableObject {
     var numPairs: Int{
         return model.cards.count / 2
     }
-    
+        
     //MARK: - Intents(s)
     
     //we get "var objectWillChange: ObservableObjectPublisher" for free from the "constrains-gains" ObservableObject above

@@ -17,18 +17,24 @@ struct EmojiMemoryGameView: View {
         VStack{
             HStack{
                 //lecture 4 requirement 6
-                Text("New Game").onTapGesture {
+                Button("New Game"){
                     viewModel.newGame()
                 }
-                Text("Theme Name")
+                .contentShape(Rectangle())
+                
+                Text(viewModel.gameTheme.themeName)
+            }
+            .padding(5)
+            HStack{
+                Text("Score:")
             }
             
             Grid(viewModel.cards) { card in
                     CardView(card: card).onTapGesture {
                         viewModel.choose(card: card)
-                    }.padding(5)
+                    }.padding(4)
             }
-                .foregroundColor(Color.orange)
+            .foregroundColor(Color.orange)
                 .padding()
 
         }

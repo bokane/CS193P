@@ -22,8 +22,9 @@ struct EmojiMemoryGameView: View {
                 }
                 .contentShape(Rectangle())
                 
-                Text(viewModel.gameTheme.themeName)
+                Text(viewModel.themeName)
             }
+            
             .padding(5)
             HStack{
                 Text("Score:")
@@ -34,7 +35,7 @@ struct EmojiMemoryGameView: View {
                         viewModel.choose(card: card)
                     }.padding(4)
             }
-            .foregroundColor(Color.orange)
+            .foregroundColor(viewModel.themeColor)
                 .padding()
 
         }

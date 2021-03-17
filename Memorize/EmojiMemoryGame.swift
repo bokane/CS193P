@@ -14,19 +14,15 @@ import SwiftUI
 class EmojiMemoryGame: ObservableObject {
     @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
-    var gameTheme: Theme<String> = halloween
     
-    
-//    func setTheme(newTheme: Theme<String>){
-//        gameTheme = newTheme
-//    }
     
     //static makes a function on the type, rather than the instance
     static func createMemoryGame() -> MemoryGame<String>{
         // parameterize game size (min to max pairs)
+        let gameTheme: Theme<String> = themeList.randomElement()!
         let maxPairs: Int = 5
         let minPairs: Int = 2
-        var emojiStart: Array<String> = ["🎃","👻", "🕷", "👺", "🕸", "👹", "😈", "⻤", "🍭", "🍫", "🍬", "🦹🏻‍♂️"]
+        var emojiStart: Array<String> = gameTheme.themeEmojis
         emojiStart.shuffle()
         var emojiFinal: Array<String> = Array<String>()
         
@@ -39,8 +35,8 @@ class EmojiMemoryGame: ObservableObject {
             }
         //initialize game with number of pairs parameter
         //re-wrote to satisfy lecture 2 homework 4 (random number of pairs)
-        return MemoryGame<String>(numberOfPairsOfCards: Int.random(in: minPairs..<maxPairs+1)) { pairIndex in
-            return emojiStart[pairIndex]
+        return MemoryGame<String>(theme: gameTheme, numberOfPairsOfCards: Int.random(in: minPairs..<maxPairs+1)) { pairIndex in
+            return gameTheme.themeEmojis[pairIndex]
         }
     }
         
@@ -55,6 +51,16 @@ class EmojiMemoryGame: ObservableObject {
     var numPairs: Int{
         return model.cards.count / 2
     }
+    
+    var themeName: String{
+        return model.gameTheme.themeName
+    }
+    
+    var themeColor: Color{
+        return model.gameTheme.themeColor
+    }
+
+
         
     //MARK: - Intents(s)
     

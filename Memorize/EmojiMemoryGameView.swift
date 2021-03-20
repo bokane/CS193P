@@ -22,20 +22,21 @@ struct EmojiMemoryGameView: View {
                 }
                 .contentShape(Rectangle())
                 
-                Text(viewModel.themeName)
+                Text(viewModel.themeName).foregroundColor(viewModel.themeColor)
             }
             
             .padding(5)
             HStack{
-                Text("Score:")
+                Text("Score: \(viewModel.score)")
             }
             
             Grid(viewModel.cards) { card in
                     CardView(card: card).onTapGesture {
                         viewModel.choose(card: card)
                     }.padding(4)
+                    .foregroundColor(viewModel.themeColor)
             }
-            .foregroundColor(viewModel.themeColor)
+                
                 .padding()
 
         }

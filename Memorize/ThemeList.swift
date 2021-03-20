@@ -14,7 +14,7 @@ let animals = Theme<String>(themeName: "Nature", themeColor: Color.green, numCar
 
 let sports = Theme<String>(themeName: "Ballz", themeColor: Color.purple, numCards: 3, themeEmojis: ["⚽️","🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏", "🎱", "🤿", "⛳️"])
 
-let fruits = Theme<String>(themeName: "Fruit", themeColor: Color.red, numCards: 3, themeEmojis: ["🍎","🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🫐", "🍈", "🍒", "🥝"])
+let fruits = Theme<String>(themeName: "Fruit", themeColor: Color.blue, numCards: 3, themeEmojis: ["🍎","🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🫐", "🍈", "🍒", "🥝"])
 
 let takeout = Theme<String>(themeName: "Seamless", themeColor: Color.red, numCards: 3, themeEmojis: ["🍣","🍱", "🍙", "🌯", "🥗", "🍕", "🌭", "🍔", "🥨", "🌮", "🥙", "🧆"])
 

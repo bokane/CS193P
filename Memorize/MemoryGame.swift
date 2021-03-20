@@ -12,7 +12,15 @@ import Foundation
 struct MemoryGame<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
     
-    //lecture
+    var seen: Set<Int>
+        
+    var score: Int = 0
+    
+    private var reward: Int = 2
+    
+    private var penalty: Int = 1
+    
+    //assignent 2 3-7
     var gameTheme: Theme<CardContent>
     
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
@@ -33,8 +41,20 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
+                    score = score + reward
+                } else {
+                    if seen.contains(cards[chosenIndex].id) {
+                        score = score - penalty
+                    }
+                    if seen.contains(cards[potentialMatchIndex].id) {
+                        score = score - penalty
+                    }
+                    seen.insert(cards[chosenIndex].id)
+                    seen.insert(cards[potentialMatchIndex].id)
+
                 }
                 self.cards[chosenIndex].isFaceUp = true
+        
             } else {
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
@@ -43,12 +63,13 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         
     init(theme: Theme<CardContent>, numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent){
         cards = Array<Card>()
-        gameTheme  = theme
+        gameTheme = theme
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = cardContentFactory(pairIndex)
             cards.append(Card(content: content, id: pairIndex*2))
             cards.append(Card(content: content, id: pairIndex*2+1))
         }
+        seen = Set<Int>()
         //satisfy lecture 2 requirement 2
         cards.shuffle()
         
@@ -57,6 +78,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     struct Card: Identifiable {
         var isFaceUp: Bool = false
         var isMatched: Bool = false
+        var seenCount: Int = 0
         var content: CardContent
         var id: Int
     }

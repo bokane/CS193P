@@ -13,11 +13,9 @@ import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
-    
-    
-    
+        
     //static makes a function on the type, rather than the instance
-    static func createMemoryGame() -> MemoryGame<String>{
+    private static func createMemoryGame() -> MemoryGame<String>{
         // parameterize game size (min to max pairs)
         let gameTheme: Theme<String> = themeList.randomElement()!
         let maxPairs: Int = 5

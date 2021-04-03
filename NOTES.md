@@ -2,6 +2,14 @@
 I've found even if I don't always refer to them after the fact (acknowledging I probably should...) taking notes during lecture videos increases my focus and retention. 
 
 
+## Lecture 5 Notes
+
+### Access Control
+First use of access control was ```private``` in our ```EmojiMemoryGame``` class. ```private(set)``` is a read-only access control, allowing other parts of the program to read but not define a variable.
+
+In case of the ```card``` struct, we don't need to make it private because the only time a ```card``` is accessed is via the ```cards``` array, which we've made ```private(set)```.
+
+
 ## Lecture 4 Notes
 Starting off continuing the Memorize build, namely creating a grid as opposed to just rows or just columns. 
 

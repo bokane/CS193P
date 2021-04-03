@@ -10,7 +10,7 @@ import Foundation
 //models might not be structs, could be SQL database, network thing, etc.
 //CardContent is a "don't care" type - we'll initialize as a string later
 struct MemoryGame<CardContent> where CardContent: Equatable {
-    var cards: Array<Card>
+    private(set) var cards: Array<Card>
     
     var seen: Set<Int>
         
@@ -23,7 +23,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     //assignent 2 3-7
     var gameTheme: Theme<CardContent>
     
-    var indexOfTheOneAndOnlyFaceUpCard: Int? {
+    private var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter {cards[$0].isFaceUp}.only
         }
         set {

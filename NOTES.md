@@ -53,7 +53,7 @@ A glimpse at the protocol for such a function:
 protocol ViewModifier {
   associatedtype Content //this is effectively a protocol's version of a generic / "don't care"
   func body(content: Content) -> some View {
-    return some View that represents a modification of content
+    return "some View that represents a modification of *content*"
   }
 }
 ```

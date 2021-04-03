@@ -32,7 +32,6 @@ Shape is a protocol that inherits from Views -> all Shapes are also Views. We've
 ```swift
 func fill<S>(_ whatToFillWith: S) -> View where S: ShapeStyle
 ```
-
 This is an example of a generic subject to a protocol restriction, so the generic can be any type that implements [```ShapeStyle```](https://developer.apple.com/documentation/swiftui/shapestyle). Based on the docs, these can include Color, ImagePaint, AngularGradient, LinearGradient, etc.
 
 To create our own Shape, we are required to implement the following function:
@@ -42,8 +41,55 @@ func path(in rect: CGRect) -> Path {
   return a Path
 }
 ```
-
 Paths are bezier curves, lines, arcs, etc. used in constructing a custom Shape. 
+
+### Animation
+Animation is important in a mobile user interface. You could for example animate by animating a Shape, but you can also animate Views generally via their ```ViewModifiers```. 
+
+```ViewModifiers``` are functions that modify our Views. Most of them are implemented using the  
+
+A glimpse at the protocol for such a function:
+```swift
+protocol ViewModifier {
+  associatedtype Content //this is effectively a protocol's version of a generic / "don't care"
+  func body(content: Content) -> some View {
+    return some View that represents a modification of content
+  }
+}
+```
+when we call a ```modifier``` on a View, the ```content``` passed to our ```ViewModifier``` function *is* that View. Example: if we wanted a modifier to take some View, then 'card-ify' that view onto a card like in Memorize, we'd make a ```ViewModifier``` function. 
+
+**EXAMPLE:**
+```swift
+Text("👻").modifier(Cardify(isFaceUp: true) // eventually, this will be .cardify(isFaceUp: true)
+
+struct Cardify: ViewModifier {
+  var isFaceUp: Bool
+  func body(content: Content) -> some View {
+    ZStack {
+      if isFaceUp {
+        RoundedRectangle(cornerRadius: 10).fill(Color.white)
+        RoundedRectangle(cornerRadius: 10).strok()
+        content
+      }
+      else {
+        RoundedRectangle(cornerRadius: 10)
+      }
+    }
+  }
+}
+```
+
+To simplify further, we create an extension to View as follows:
+```swift
+extension View {
+  func cardify(isFaceUp: Bool) -> some View {
+    return self.modifier(Cardify(isFaceUp))
+  }
+}
+``` 
+
+
 
 
 ## Lecture 4 Notes

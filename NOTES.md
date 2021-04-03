@@ -4,10 +4,46 @@ I've found even if I don't always refer to them after the fact (acknowledging I 
 
 ## Lecture 5 Notes
 
+**Note to self**: Cmd+Shift+O in Xcode to quickly move between files significantly improved navigation. Should spend time learning other keyboard shortcuts, and generally incorporate this pattern anytime you work with new software. Don't let your use patterns remain complacent!
+
 ### Access Control
 First use of access control was ```private``` in our ```EmojiMemoryGame``` class. ```private(set)``` is a read-only access control, allowing other parts of the program to read but not define a variable.
 
 In case of the ```card``` struct, we don't need to make it private because the only time a ```card``` is accessed is via the ```cards``` array, which we've made ```private(set)```.
+
+### ViewBuilder
+```@ViewBuilder``` is a mechanism to support listed oriented syntax to create Views. This keyword can be applied to any function that returns something conforming to View. If between 2 and 10 Views, will turn into a ```TupleView```. 
+
+**EXAMPLE** 
+If we wanted to roll up the creation of a front card View in Memorize, we could do the following:
+```swift
+@ViewBuilder
+func front(of card: Card) -> some View {
+  RoundedRectangle(cornerRadius: 10)
+  RoundedRectangle(cornerRadius: 10).stroke()
+  Text(card.content)
+}
+```
+
+The ViewBuilder example above returns the following type: ```TupleView<RoundedRectangle, RoundedRectangle, Text>```. 
+
+### Shapes
+Shape is a protocol that inherits from Views -> all Shapes are also Views. We've used ```RoundedRectangle``` but there are plenty of others. By default, Shapes fill themselves with the default foreground color. But we can call ```.stroke()``` or ```.fill()``` with arguments to edit this, e.g. a standard Color. Shape is implemented with a "don't care" generic, roughly along the lines of the below:
+```swift
+func fill<S>(_ whatToFillWith: S) -> View where S: ShapeStyle
+```
+
+This is an example of a generic subject to a protocol restriction, so the generic can be any type that implements [```ShapeStyle```](https://developer.apple.com/documentation/swiftui/shapestyle). Based on the docs, these can include Color, ImagePaint, AngularGradient, LinearGradient, etc.
+
+To create our own Shape, we are required to implement the following function:
+
+```swift
+func path(in rect: CGRect) -> Path {
+  return a Path
+}
+```
+
+Paths are bezier curves, lines, arcs, etc. used in constructing a custom Shape. 
 
 
 ## Lecture 4 Notes
